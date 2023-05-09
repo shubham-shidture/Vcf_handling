@@ -1,0 +1,16 @@
+## Description : This script is required extraction of DP4 valuses from vcf file. It requires files with following cloumns
+## CHR , Position, and INFO cols of VCF
+
+import re
+a = open(input("Give the name of file to extract DP4 values:"))
+fw = open(input("Give the name of file to extract DP4 values:"), "w")
+
+
+for line in a:
+    line = line.rstrip()
+    if line.startswith("#"):
+        next
+    else:
+        k = re.compile(r'(\S+)\t(\d+)\t.*(DP4=)(\d+)\S(\d+)\S(\d+)\S(\d+);.*')
+        m = k.search(line)
+        print(m.group(1), m.group(2), m.group(4), m.group(5), m.group(6), m.group(7), sep="\t", file=fw)
